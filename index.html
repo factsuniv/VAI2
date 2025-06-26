@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAI Partners | Where Connection Becomes Strategy</title>
+    <meta name="description" content="VAI Partners helps organizations transform leadership, elevate team engagement, and drive performance through the power of human connection.">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* New Custom Palette */
+            --custom-near-black: #131200;
+            --custom-dark-blue: #031A6B;
+            --custom-lavender: #8175FF;
+            --custom-light-grayish-blue: #D8DBE2;
+            --site-white: #FFFFFF; /* Explicit white for high contrast needs */
+
+            /* Mapping to a more generic naming convention for easier application */
+            --color-text-primary: var(--custom-near-black);
+            --color-text-secondary: var(--custom-dark-blue); /* Or a gray derived from the palette if needed */
+            --color-background-primary: var(--site-white);
+            --color-background-secondary: var(--custom-light-grayish-blue);
+            --color-accent-primary: var(--custom-lavender);
+            --color-accent-secondary: var(--custom-dark-blue);
+            --color-border-primary: var(--custom-light-grayish-blue); /* Can be darkened if needed */
+            --color-border-focus: var(--custom-lavender);
+            
+            /* Preserving shadow and transition styles from previous Apple theme, adjust if they clash */
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            color: var(--color-text-primary); /* Default text color */
+            background-color: var(--color-background-primary); /* Default background */
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--color-text-primary); /* Changed to primary text color for better readability */
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85); /* Using site-white with opacity */
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent; 
+        }
+
+        .navbar.scrolled {
+            background: rgba(216, 219, 226, 0.9); /* --custom-light-grayish-blue with opacity */
+            box-shadow: var(--shadow-soft);
+            border-bottom: 1px solid var(--color-border-primary); 
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary); 
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary); /* Using dark blue for nav links */
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent-primary); /* Hover color to lavender */
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent-primary); /* Accent line to lavender */
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-nav {
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);    
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px; /* Keeping this for now, can be changed to 8px for consistency */
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            filter: brightness(110%); 
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-text-primary); /* Burger menu lines color */
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            text-align: center; 
+            background: var(--color-background-secondary); /* Light grayish blue background */
+            color: var(--color-text-primary); 
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+
+        .hero::before { 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/team-workshop.jpg') center/cover; 
+            opacity: 0.05; 
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px; 
+            margin: 0 auto;
+            padding: 2rem; 
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-text {
+            max-width: 100%; 
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--color-text-primary); 
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--color-text-secondary); /* Dark blue for hero paragraph */
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px; 
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-hover);
+            filter: brightness(110%); 
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1rem;
+            color: var(--color-text-primary); 
+            /* Removed background-clip and text-fill-color properties */
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--color-text-secondary); /* Section header paragraph */
+        }
+
+        /* About Section */
+        .about {
+            background: var(--color-background-secondary); 
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--color-text-primary); 
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* VAI Framework */
+        .vai-framework {
+            padding: 6rem 0;
+            background: var(--color-background-primary); 
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .framework-card {
+            background: var(--color-background-primary); /* White card background */
+            padding: 3rem 2rem;
+            border-radius: 12px; 
+            text-align: center;
+            box-shadow: none; 
+            border: 1px solid var(--color-border-primary); /* light grayish blue border */
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-accent-primary); /* Lavender accent */
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .framework-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-soft); 
+            border-color: transparent;
+        }
+
+        .framework-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .framework-icon {
+            width: 60px; 
+            height: 60px;
+            background: var(--color-accent-primary); /* Lavender background for icon */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem; 
+            color: var(--site-white); 
+        }
+
+        .framework-card h3 {
+            color: var(--color-text-primary); 
+            margin-bottom: 1rem;
+        }
+
+        /* Core Values */
+        .core-values {
+            background: var(--color-background-secondary); /* Light grayish blue background */
+            color: var(--color-text-primary); 
+        }
+        
+        .core-values .section-header h2 { 
+            color: var(--color-text-primary);
+            -webkit-text-fill-color: initial; 
+        }
+
+        .core-values .section-header p {
+            color: var(--color-text-secondary);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .value-card {
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            background: var(--color-background-primary); /* White card background */
+            border: 1px solid var(--color-border-primary); /* Light grayish blue border */
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .value-card:hover {
+            background: var(--color-background-primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .value-card h3 {
+            color: var(--color-accent-primary); /* Lavender for headings */
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .value-card p {
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
+        }
+
+        /* Impact Metrics */
+        .impact-metrics {
+            background: var(--color-background-secondary); 
+            padding: 6rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; 
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: var(--color-background-primary); 
+            padding: 2.5rem 2rem; 
+            border-radius: 12px; 
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid transparent; 
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent-primary); /* Lavender hover effect */
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0; 
+        }
+
+        .metric-card:hover::before {
+            opacity: 0.05; /* Subtle lavender tint on hover */
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-hover);
+        }
+
+        .metric-number {
+            font-size: 2.8rem; 
+            font-weight: 700; 
+            color: var(--color-accent-primary); /* Lavender for numbers */
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-label {
+            font-size: 1rem; 
+            color: var(--color-text-primary); 
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-description {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary); 
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: var(--color-background-primary); /* White background */
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; 
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--color-background-primary);
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--color-border-primary); /* Light grayish blue border */
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-border-primary); 
+        }
+
+        .service-image {
+            height: 200px;
+            background: var(--color-background-secondary); /* Light grayish blue for image bg */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1; 
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            color: var(--color-text-primary); 
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--custom-dark-blue); /* Dark blue background */
+            color: var(--site-white); 
+            padding: 6rem 0;
+        }
+        
+        .testimonials .section-header h2, .testimonials .section-header p {
+            color: var(--site-white); 
+             -webkit-text-fill-color: initial; 
+        }
+
+
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial {
+            padding: 2rem;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .testimonial-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: var(--site-white); 
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--site-white); 
+            opacity: 0.9; 
+        }
+
+        .testimonial-company {
+            color: rgba(255, 255, 255, 0.7); 
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: var(--color-background-secondary); 
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: var(--color-background-primary); 
+            padding: 3rem;
+            border-radius: 12px; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--color-border-primary); 
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem; 
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text-primary); 
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem; 
+            border: 1px solid var(--color-border-primary); 
+            border-radius: 8px; 
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+            background-color: var(--color-background-primary); 
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-border-focus); /* Lavender focus border */
+            box-shadow: 0 0 0 3px rgba(129, 117, 255, 0.15); /* Lavender glow */
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px; 
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            filter: brightness(110%); 
+        }
+
+        .contact-info h3 {
+            color: var(--color-text-primary); 
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 44px; 
+            height: 44px;
+            background: var(--color-accent-primary); /* Lavender icon background */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--site-white); 
+            font-weight: bold;
+            font-size: 1.2rem; 
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--custom-dark-blue); /* Dark blue footer background */
+            color: rgba(255, 255, 255, 0.8); /* Light text for footer */
+            padding: 3rem 0 2rem;
+            text-align: center;
+            /* border-top: 1px solid var(--color-border-primary); Removed top border for dark bg */
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.8); 
+            margin-bottom: 1rem;
+            font-size: 0.9rem; 
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--custom-lavender); /* Lavender links */
+            text-decoration: none;
+            font-weight: 500; 
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--site-white); /* White hover for links */
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .framework-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-background-secondary); /* Light grayish blue background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px; 
+            height: 50px;
+            border: 4px solid rgba(129, 117, 255, 0.2); /* Lavender with low opacity for track */
+            border-top: 4px solid var(--custom-lavender); /* Lavender for spinner highlight */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="images/vai-logo.png" alt="VAI Partners">
+                VAI Partners
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="cta-nav">Book Consultation</a></li>
+            </ul>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Bring VAI to Your Team</h1>
+                <p>We help leaders and teams build cultures of connection, alignment, and high performance through the power of human connection.</p>
+                <a href="#contact" class="cta-button">Book a Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Where Connection Becomes Strategy</h2>
+                <p>VAI Partners helps organizations transform leadership, elevate team engagement, and drive performance through the power of human connection.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <h3>Our Mission</h3>
+                    <p>VAI Partners is a leadership development and engagement consulting firm that helps organizations transform leadership, deepen team trust, and drive results through the power of human connection.</p>
+                    <p>Our signature experiences move teams from task-driven execution to values-driven alignment — embedding trust, communication intelligence, and psychological safety into how teams operate every day.</p>
+                    <p>We equip teams to move from task-driven execution to values-driven alignment - building cultures where people feel seen, leaders lead with clarity, and performance is sustainable.</p>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <img src="images/team-collaboration.jpg" alt="Team collaboration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VAI Framework -->
+    <section class="section vai-framework" id="approach">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>The VAI Approach</h2>
+                <p>Our framework is built on three fundamental principles that drive authentic leadership and sustainable performance.</p>
+            </div>
+            <div class="framework-grid">
+                <div class="framework-card animate-on-scroll">
+                    <div class="framework-icon">V</div>
+                    <h3>Vulnerability</h3>
+                    <p>We lead with openness, not armor. True leadership begins when we have the courage to be genuine and create space for others to do the same.</p>
+                </div>
+                <div class="framework-card animate-on-scroll">
+                    <div class="framework-icon">A</div>
+                    <h3>Authenticity</h3>
+                    <p>We don't perform professionalism. We show up whole. Authentic connection happens when people can bring their full selves to their work.</p>
+                </div>
+                <div class="framework-card animate-on-scroll">
+                    <div class="framework-icon">I</div>
+                    <h3>Identity</h3>
+                    <p>We believe clarity of self leads to clarity in leadership. When leaders know who they are, they can guide others with confidence and purpose.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="section core-values">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Core Values</h2>
+                <p>These values guide everything we do and shape how we work with our clients.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <h3>Connection</h3>
+                    <p>We don't just build teams — we make people feel. We create environments where every voice matters, because real engagement starts with real belonging.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <h3>Alignment</h3>
+                    <p>Clarity in direction. Unity in action. We help leaders and teams move in sync — not just to perform, but to fulfill a shared purpose.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <h3>Integrity</h3>
+                    <p>Excellence that can be trusted. We uphold the highest standards in everything we deliver — because quality without character is just performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Metrics -->
+    <section class="section impact-metrics" id="impact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Soft Skills. Hard ROI.</h2>
+                <p>Our approach delivers measurable results that transform teams and drive business outcomes.</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="23.3">0</div>
+                    <div class="metric-label">% Increase</div>
+                    <div class="metric-description">in participants feeling connected</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="30">0</div>
+                    <div class="metric-label">% Boost</div>
+                    <div class="metric-description">in confidence initiating conversations</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="21">0</div>
+                    <div class="metric-label">% Increase</div>
+                    <div class="metric-description">in group engagement</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="100">0</div>
+                    <div class="metric-label">% Confidence</div>
+                    <div class="metric-description">in addressing challenges</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="67">0</div>
+                    <div class="metric-label">% Improvement</div>
+                    <div class="metric-description">in team communication understanding</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="100">0</div>
+                    <div class="metric-label">% Alignment</div>
+                    <div class="metric-description">compared to pre-workshop</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="83">0</div>
+                    <div class="metric-label">% More Equipped</div>
+                    <div class="metric-description">for team engagement</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-number" data-target="4.67">0</div>
+                    <div class="metric-label">/5 Rating</div>
+                    <div class="metric-description">overall satisfaction score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Our Services</h2>
+                <p>Interactive experiences that move teams from silos to synergy, from tasks to trust, and from culture talk to culture change.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/team-workshop.jpg" alt="Engage to Excel Workshop">
+                    </div>
+                    <div class="service-content">
+                        <h3>Engage to Excel™</h3>
+                        <p>An experiential workshop designed to foster deep connection and strategic alignment. Transform your team dynamics through interactive sessions that build trust and drive performance.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/executive-meeting.jpg" alt="Executive Roundtables">
+                    </div>
+                    <div class="service-content">
+                        <h3>Executive Roundtables</h3>
+                        <p>Exclusive leadership circles where executives share challenges, insights, and strategies. Build a network of trusted peers while developing advanced leadership capabilities.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/consulting-session.jpeg" alt="Culture Audits">
+                    </div>
+                    <div class="service-content">
+                        <h3>Culture Audits</h3>
+                        <p>Comprehensive assessment of your organization's culture, identifying strengths and opportunities for growth. Get actionable insights to build a more connected workplace.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/team-building.jpg" alt="Interactive Keynotes">
+                    </div>
+                    <div class="service-content">
+                        <h3>Interactive Keynotes</h3>
+                        <p>Engaging presentations that go beyond traditional speaking. Transform your event with interactive experiences that inspire and activate lasting change.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/team-collaboration.jpg" alt="Strategic Labs">
+                    </div>
+                    <div class="service-content">
+                        <h3>Strategic Alignment Labs</h3>
+                        <p>Intensive strategy sessions that align leadership vision with team execution. Build coherent strategies that everyone understands and can execute effectively.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="images/executive-meeting.jpg" alt="AI-Enhanced Labs">
+                    </div>
+                    <div class="service-content">
+                        <h3>AI-Enhanced Labs</h3>
+                        <p>Cutting-edge workshops that leverage technology to enhance human connection. Explore the future of leadership development with innovative, data-driven approaches.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>What Our Clients Say</h2>
+                <p>Hear from leaders who have transformed their teams with VAI Partners.</p>
+            </div>
+            <div class="testimonial-carousel">
+                <div class="testimonial active">
+                    <div class="testimonial-quote">
+                        "VAI Partners transformed how our leadership team connects and collaborates. The impact on our culture and performance has been remarkable."
+                    </div>
+                    <div class="testimonial-author">Leadership Team</div>
+                    <div class="testimonial-company">JPMorgan Chase</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        "The VAI approach helped us build the kind of authentic leadership culture we've always aspired to create. The results speak for themselves."
+                    </div>
+                    <div class="testimonial-author">Executive Leadership</div>
+                    <div class="testimonial-company">University of Notre Dame</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        "Working with VAI Partners was a game-changer for our team. We learned to lead with vulnerability and authenticity, creating deeper connections and better results."
+                    </div>
+                    <div class="testimonial-author">Department Head</div>
+                    <div class="testimonial-company">Fortune 500 Company</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Let's Build the Future of Leadership</h2>
+                <p>Ready to transform your team's performance through the power of connection? Let's start the conversation.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form animate-on-scroll">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your team and how we can help..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info animate-on-scroll">
+                    <h3>Get in Touch</h3>
+                    <p>Ready to bring VAI to your team? Let's discuss how we can help you build a culture of connection, alignment, and high performance.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">@</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f76596f787069786b6d777c6b6a377a7674">[email&#160;protected]</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📅</div>
+                        <div>
+                            <strong>Schedule a Call</strong><br>
+                            Book a free consultation to explore how VAI can transform your team.
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🎯</div>
+                        <div>
+                            <strong>Use Cases</strong><br>
+                            Leadership Retreats, Strategy Sessions, DEIB Initiatives, Communication Resets
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#approach">Approach</a>
+                <a href="#impact">Impact</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 VAI Partners. All rights reserved.</p>
+            <p>Where Connection Becomes Strategy</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function animateCounter(element, target, suffix = '') {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (suffix === '/5') {
+                    element.textContent = current.toFixed(2) + suffix;
+                } else if (target % 1 !== 0) {
+                    element.textContent = current.toFixed(1) + suffix;
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 20);
+        }
+
+        // Metrics Animation
+        const metricsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.metric-number');
+                    const target = parseFloat(numberElement.dataset.target);
+                    const label = numberElement.nextElementSibling.textContent;
+                    
+                    let suffix = '';
+                    if (label.includes('%')) suffix = '%';
+                    if (label.includes('/5')) suffix = '/5';
+                    
+                    numberElement.style.animation = 'countUp 0.5s ease-out';
+                    animateCounter(numberElement, target, suffix);
+                    
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-card').forEach(card => {
+            metricsObserver.observe(card);
+        });
+
+        // Testimonial Carousel
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        // Auto-rotate testimonials
+        setInterval(nextTestimonial, 5000);
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your message! We\'ll be in touch soon.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Parallax Effect for Hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.framework-card, .service-card, .metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Performance optimization: Lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+
+</body>
+</html>
